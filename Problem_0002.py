@@ -32,5 +32,3 @@ def solution():
     return total
 
 print(solution())
-
-

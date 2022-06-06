@@ -25,29 +25,35 @@ Find G(53).
 Problem Solution:
 
 '''
+import time
+start_time = time.time()
+
+def chopCake(cake,angle_i,angle_f):
+    choppedCake={}
+    index=0
+    for slice in cake:
+        r1,r2,r3 = slice
+        if angle_i==r1 and angle_f==r2:
+            index+=1
+            choppedCake
+        elseif angle_i>r1 and
+
 
 def necessaryFlips(a,b,c):
     x=360/a
     y=360/b
     z=360/(c**0.5)
-    '''
-    x=60
-    y=60
-    z=60
-    '''
     slices_sequence=[x,y,z]
     n=-1
     flips=0
+    position=0
     icing_on_top=360
     icing_on_bottom=0
-    while round(abs(icing_on_top))%360!=0 or flips==0:
-        n+=1
-        if n==3:
-            n=0
-        flips+=1
-        icing_on_top-=slices_sequence[n]
-        icing_on_bottom+=slices_sequence[n]
-        print(round(abs(icing_on_top)),round(abs(icing_on_top))%360==0)
-    return flips
+
+
+    return time.time()-start_time
+
+cake={"S1": (0,360,True)}
 
 print(necessaryFlips(9,10,11))
+print(time.time()-start_time)

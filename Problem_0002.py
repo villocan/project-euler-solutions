@@ -21,14 +21,14 @@ def fibonacci(N):
         return fibonacci(N-1)+fibonacci(N-2)
 
 def solution():
-    N=1
-    total=0
-    test=1
-    while test<4000000:
-        if test%2==0:
-            total+=test
+    N=1               # starting with 1
+    total=0           # initializing total
+    last_fibonacci=1  # initializing last fibonacci
+    while last_fibonacci<4000000:
+        if last_fibonacci%2==0:
+            total+=last_fibonacci
         N+=1
-        test=fibonacci(N)
+        last_fibonacci=fibonacci(N)
     return total
 
 print(solution())

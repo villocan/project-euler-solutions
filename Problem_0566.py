@@ -32,11 +32,20 @@ def chopCake(cake,angle_i,angle_f):
     choppedCake={}
     index=0
     for slice in cake:
-        r1,r2,r3 = slice
-        if angle_i==r1 and angle_f==r2:
+        a1,a2,x = slice
+        if not(a1<angle_i<a2):
             index+=1
-            choppedCake
-        elseif angle_i>r1 and
+            choppedCake['s'+index]=slice
+        elif angle_i==a1 and angle_f==a2:
+            index+=1
+            choppedCake['s'+index]=(a1,a2,not(x))
+        elif angle_i>=a1 and angle_f<a2:
+            index+=1
+            choppedCake['s'+index]=(angle_i,angle_f,not(x))
+            index+=1
+            choppedCake['s'+index]=(a2-angle_f,a2,x)
+        elif a2>angle_i>=a1 and angle_f<a2:
+
 
 
 def necessaryFlips(a,b,c):

@@ -26,43 +26,55 @@ Problem Solution:
 
 '''
 import time
+from turtle import position
 start_time = time.time()
 
-def chopCake(cake,angle_i,angle_f):
-    choppedCake={}
-    index=0
-    for slice in cake:
-        a1,a2,x = slice
-        if not(a1<angle_i<a2):
-            index+=1
-            choppedCake['s'+index]=slice
-        elif angle_i==a1 and angle_f==a2:
-            index+=1
-            choppedCake['s'+index]=(a1,a2,not(x))
-        elif angle_i>=a1 and angle_f<a2:
-            index+=1
-            choppedCake['s'+index]=(angle_i,angle_f,not(x))
-            index+=1
-            choppedCake['s'+index]=(a2-angle_f,a2,x)
-        elif a2>angle_i>=a1 and angle_f<a2:
+class Cake():
+    def __init__(self,a,b,c):
+        self.a=a
+        self.b=b
+        self.c=c
+        self.factor=10**3
+        self.full=360*self.factor
+        self.x=round(self.full/a)
+        self.y=round(self.full/b)
+        self.z=round(self.full/(c**0.5))        
+        self.slices=[]
+        for k in range(0,self.full):
+            self.slices+=[1]
+        self.position=0
+        self.slice_buffer=[]
+        self.icing_on_top=0
+        self.icing_on_bottom=0
+    def chopAndFlip(self,size):
+        # chop
+        old_position=self.position
+        if self.position+size<self.full:
+            self.slice_buffer=self.slices[self.position:self.position+size]
+            self.position+=size
+            if self.position==self.full:
+                self.position=0
+        else:
+            self.slice_buffer=self.slices[self.position:self.full]+self.slices[0:size-self.full+self.position]
+            self.position=size-self.full+self.position
+        # flip
+        self.slice_buffer.reverse()
+        for index in range(0,len(self.slice_buffer)):
+            if self.slice_buffer[index]==0:
+                self.slice_buffer[index]=1
+            elif self.slice_buffer[index]==1:
+                self.slice_buffer[index]=0
+        # insert
 
+    def totalize(self):
+        self.icing_on_top=100*sum(self.slices)/self.full
+        self.icing_on_bottom=100-self.icing_on_top
+    def talk(self):
+        self.totalize()
+        self.chopAndFlip(self.x)
+        print(self.icing_on_top,self.icing_on_bottom)
 
+Cake1= Cake(9,10,11)
+Cake1.talk()
 
-def necessaryFlips(a,b,c):
-    x=360/a
-    y=360/b
-    z=360/(c**0.5)
-    slices_sequence=[x,y,z]
-    n=-1
-    flips=0
-    position=0
-    icing_on_top=360
-    icing_on_bottom=0
-
-
-    return time.time()-start_time
-
-cake={"S1": (0,360,True)}
-
-print(necessaryFlips(9,10,11))
-print(time.time()-start_time)
+print("Time: " + str(time.time()-start_time) + " secs")

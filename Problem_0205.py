@@ -14,37 +14,37 @@ What is the probability that Pyramidal Pete beats Cubic Colin? Give your answer 
 Problem Solution:
 
 '''
+
 class Person:
-  def __init__(self, dices, faces_per_dice):
-    self.dices = dices
-    self.faces_per_dice = faces_per_dice
-    self.cardinal = faces_per_dice**dices
-    self.combinations = []
-    col = 0
-    row = [1]
-    for k1 in range(1,dices):
-        row.append(1)
-    for k2 in range (1,1+self.cardinal):
-        self.combinations.append(row)
-        row[col]=k2%faces_per_dice+1
-        if k2%faces_per_dice+1 == 1:
-            col+=1
-        if col == faces_per_dice-1:
-            col=0
-        
+    def __init__(self, dices, faces_per_dice):
+        self.dices = dices
+        self.faces_per_dice = faces_per_dice
+        self.cardinal = faces_per_dice**dices
+        self.combinations = []
+        self.totals = []
+        self.filtered = []
+        row = [1]*dices
+        row[0] = 0
+        for k1 in range (0,self.cardinal):
+            for k2 in range(0,dices):
+                if k2==0:
+                    row[0]+=1
+                if row[k2]>faces_per_dice:
+                    row[k2]=1
+                    row[k2+1]+=1
+            self.combinations.append(row.copy())
+            self.totals.append(sum(row))
 
-
-  def f1(self):
-    return 0
-
-Colin = Person(4,4)
-Peter = Person(6,6)
-
-print(Colin.cardinal)
-print(Peter.cardinal)
+Peter = Person(9,4)
+Colin = Person(6,6)
 
 def solution():
     result = 0
-    return result
+    for value1 in Peter.totals:
+        for value2 in Colin.totals:
+            if value1 > value2:
+                result += 1
+    result *= 1/(Colin.cardinal*Peter.cardinal)
+    return round(result,7)
 
 print(solution())

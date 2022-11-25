@@ -15,17 +15,20 @@ Problem Solution:
 '''
 
 def solution():
-    result = round(0.5*(1+(1+2*(10**12)*(10**12-1))**0.5))
-    total = 10**12
-    prob = (result/total)*((result-1)/(total-1))
-    while prob != 0.5:
-        if prob > 0.5:
-            total += 1
-        elif prob < 0.5:
-            total += 1
-            result += 1
-        prob = (result/total)*((result-1)/(total-1))
-        print(result,total,prob)
+    # blue_discs = round(0.5*(1+(1+2*(10**12)*(10**12-1))**0.5))
+    # red_discs = 10**12 - blue_discs
+    blue_discs = 1+707106849950
+    red_discs = 10**12 - blue_discs
+    err = 1
+    while err != 0:
+        prob = (blue_discs/(blue_discs+red_discs))*((blue_discs-1)/(blue_discs+red_discs-1))
+        if prob < 0.5:
+            blue_discs += 1
+        elif prob > 0.5:
+            red_discs += 1
+        err = 200*abs(prob-0.5)
+        print(blue_discs,red_discs)
+    result = blue_discs
     return result
 
 print(solution())

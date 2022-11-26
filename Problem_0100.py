@@ -17,18 +17,19 @@ Problem Solution:
 def solution():
     # blue_discs = round(0.5*(1+(1+2*(10**12)*(10**12-1))**0.5))
     # red_discs = 10**12 - blue_discs
-    blue_discs = 1+707106849950
-    red_discs = 10**12 - blue_discs
+    blue_discs = 0
+    red_discs = 0
+    discs = 1000000002605
     err = 1
     while err != 0:
-        prob = (blue_discs/(blue_discs+red_discs))*((blue_discs-1)/(blue_discs+red_discs-1))
-        if prob < 0.5:
-            blue_discs += 1
-        elif prob > 0.5:
-            red_discs += 1
-        err = 200*abs(prob-0.5)
-        print(blue_discs,red_discs)
-    result = blue_discs
-    return result
+        K = discs
+        A = 2
+        B = 2-4*K
+        C = K**2-K
+        red_discs = (-B-(B**2-4*A*C)**0.5)/(2*A)
+        blue_discs = discs - red_discs
+        err = abs(red_discs-round(red_discs))
+        discs += 1
+    return blue_discs
 
 print(solution())

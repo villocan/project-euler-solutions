@@ -15,20 +15,17 @@ Problem Solution:
 756872327473
 '''
 
-def solution(min_discs):
-    blue_discs = round(0.5+(0.25+0.5*min_discs*(min_discs-1))**0.5)
+def solution(min_discs,target_prob):
+    blue_discs = round(0.5+(0.25+target_prob*min_discs*(min_discs-1))**0.5)
     red_discs = min_discs-blue_discs
-    den=[1]
-    prob = 1/6
-    while blue_discs+red_discs<min_discs or den.pop()!=2 or den!=num:
-        if prob < 0.5:
+    prob = 0
+    while blue_discs+red_discs<min_discs or prob!=target_prob:
+        if prob < target_prob:
             blue_discs += 1
         else:
             red_discs += 1
-        num = findPrimes(blue_discs*(blue_discs-1))
-        den = findPrimes((blue_discs+red_discs)*(blue_discs+red_discs-1))
-        prob = round(blue_discs*(blue_discs-1)/(blue_discs+red_discs)/(blue_discs+red_discs-1),10)
-        print(prob,blue_discs,red_discs,num,den)
+        prob = blue_discs*(blue_discs-1)/(blue_discs+red_discs)/(blue_discs+red_discs-1)
+        print(prob,blue_discs,red_discs)
     return blue_discs, red_discs
 
-print(solution(10**12))
+print(solution(10**12,0.5))

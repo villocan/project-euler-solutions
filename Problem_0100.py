@@ -15,37 +15,10 @@ Problem Solution:
 756872327473
 '''
 
-def isPrime(number):
-    result = True
-    divisor = 2
-    while divisor != number:        
-        if number%divisor == 0:
-            result = False
-            break
-        divisor += 1
-    return result
-
-def findPrimes(number):
-    result = []
-    divisor = 2
-    while number != 1:
-        if isPrime(divisor):
-            if number%divisor == 0:
-                result.append(divisor)
-                number /= divisor
-            else:
-                divisor += 1
-        else:
-            divisor += 1
-        if abs(number) > 1 and abs(number) < 2:
-            result = 'error'
-            break
-    result.sort(reverse=True)
-    return result
-
 def solution(min_discs):
-    blue_discs = 756872327472
-    red_discs = 10**12-756872327472
+    blue_discs = round(0.5+(0.25+0.5*min_discs*(min_discs-1))**0.5)
+    red_discs = min_discs-blue_discs
+    den=[1]
     prob = 1/6
     while blue_discs+red_discs<min_discs or den.pop()!=2 or den!=num:
         if prob < 0.5:
@@ -56,6 +29,6 @@ def solution(min_discs):
         den = findPrimes((blue_discs+red_discs)*(blue_discs+red_discs-1))
         prob = round(blue_discs*(blue_discs-1)/(blue_discs+red_discs)/(blue_discs+red_discs-1),10)
         print(prob,blue_discs,red_discs,num,den)
-    return blue_discs
+    return blue_discs, red_discs
 
 print(solution(10**12))

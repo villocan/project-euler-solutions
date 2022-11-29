@@ -25,6 +25,7 @@ def isPrime(N):
 def solution(number):
     result = 0
     for k in range(2,number):
+        print(k)
         if isPrime(k):
             result+=k
     return result

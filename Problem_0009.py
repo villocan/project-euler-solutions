@@ -13,18 +13,18 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 
 Problem Solution:
-
+31875000
 '''
 
 def solution():
-    a=1
-    b=1
+    a=300
+    b=200
     while a+b+(a**2+b**2)**0.5 != 1000:
         a+=1
-        if a==1000:
+        if a==500:
             b+=1
             a=1
         print(a+b+(a**2+b**2)**0.5)
-    return a*b*(a**2+b**2)**0.5
+    return a, b, a*b*(a**2+b**2)**0.5
 
 print(solution())

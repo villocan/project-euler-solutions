@@ -12,6 +12,7 @@ Find the sum of all the primes below two million.
 Problem Solution:
 
 '''
+import time
 
 def isPrime(number):
     result = True
@@ -31,4 +32,6 @@ def solution(number):
             result+=k
     return result
 
-print(solution(2*10**6))
+timer=time.time()
+print(solution(10))
+print(f'It took {round(time.time()-timer,4)} secs')

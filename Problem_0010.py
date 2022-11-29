@@ -13,14 +13,15 @@ Problem Solution:
 
 '''
 
-def isPrime(N):
-    multiples=0
-    for n in range(1,N):
-        if N%(N-n)==0:
-            multiples+=1
-        if multiples>1:
-            return False
-    return True
+def isPrime(number):
+    result = True
+    divisor = 2
+    while divisor != number:        
+        if number%divisor == 0:
+            result = False
+            break
+        divisor += 1
+    return result
 
 def solution(number):
     result = 0

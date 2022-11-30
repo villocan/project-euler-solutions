@@ -17,8 +17,10 @@ from primality import primality as prim
 
 def solution(number):
     result = 0
-    for prime in prim.prange(number):
-        result += prime
+    while number>1:
+        if prim.isprime(number):
+            result += number
+        number -= 1
     return result
 
 timer=time.time()

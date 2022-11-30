@@ -19,6 +19,25 @@ grid=[[8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8],[49,49,99,40,17,81,1
 
 def solution():
     result = 0
+    hor_value = 0
+    ver_value = 0
+    diag_value1 = 0
+    diag_value2 = 0
+    for ki in range(0,20):
+        for kj in range(0,17):
+            hor_value=grid[ki][kj]*grid[ki][kj+1]*grid[ki][kj+2]*grid[ki][kj+3]
+            ver_value=grid[kj][ki]*grid[kj+1][ki]*grid[kj+2][ki]*grid[kj+3][ki]
+            if ki<=16:
+                diag_value1=grid[ki][kj]*grid[ki+1][kj+1]*grid[ki+2][kj+2]*grid[ki+3][kj+3]
+                diag_value2=grid[19-ki][19-kj]*grid[18-ki][18-kj]*grid[17-ki][17-kj]*grid[16-ki][16-kj]
+            if result<hor_value:
+                result=hor_value
+            if result<ver_value:
+                result=ver_value
+            if result<diag_value1:
+                result=diag_value1
+            if result<diag_value2:
+                result=diag_value2
     return result
 
 timer=time.time()

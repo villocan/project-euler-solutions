@@ -25,20 +25,24 @@ Problem Solution:
 import time
 
 def detFactors(number):
-    factors = [1]
-    factor = 2
-    if number%factor==0:
-        factors.append()
-    return 
+    factors = [number,1]
+    for factor in range(2,number):
+        if number%factor==0:
+            factors.append(factor)
+    return factors
 
 def solution(target):
     result = 0
     factors = [1]
     k = 0
     while len(factors)<target:
-
+        k += 1
+        result += k
+        factors = detFactors(result)
+    factors.sort()
+    print(factors)
     return result
 
 timer=time.time()
-print(solution(100))
+print(solution(500))
 print(f'It took {round(time.time()-timer,4)} secs')

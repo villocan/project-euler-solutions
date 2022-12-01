@@ -24,10 +24,21 @@ Problem Solution:
 '''
 import time
 
-def solution():
+def detFactors(number):
+    factors = [1]
+    factor = 2
+    if number%factor==0:
+        factors.append()
+    return 
+
+def solution(target):
     result = 0
+    factors = [1]
+    k = 0
+    while len(factors)<target:
+
     return result
 
 timer=time.time()
-print(solution())
+print(solution(100))
 print(f'It took {round(time.time()-timer,4)} secs')

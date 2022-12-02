@@ -23,27 +23,28 @@ Problem Solution:
 
 '''
 import time
-from primality import primality as prim
 
-def detFactors(number):
-    factors = [number,1]
+def findDivisors(number):
+    factors = [1]
     for factor in range(2,number):
         if number%factor==0:
             factors.append(factor)
-    factors.sort()
+    factors.append(number)
     return factors
 
 def triangNumber(n):
-    return (n**2+n)/2
+    return round((n**2+n)/2)
 
 def solution(target):
     result = 0
-    factors = [1]
+    divisors = 0
     n = 1
-    while len(factors)<target:
+    while divisors<target:
         n += 1
-        result = round(triangNumber(n))
-        factors=detFactors(result)
+        result = triangNumber(n)
+        divisors_list = findDivisors(result)
+        divisors = len(divisors_list)
+        print(n,result,divisors)
     return result
 
 timer=time.time()

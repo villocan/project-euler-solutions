@@ -38,7 +38,7 @@ def triangNumber(n):
 def solution(target):
     result = 0
     divisors = 0
-    n = 1
+    n = 12374
     while divisors<target:
         n += 1
         result = triangNumber(n)

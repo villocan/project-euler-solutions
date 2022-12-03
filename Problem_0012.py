@@ -20,14 +20,14 @@ We can see that 28 is the first triangle number to have over five divisors.
 What is the value of the first triangle number to have over five hundred divisors?
 
 Problem Solution:
-
+76576500
 '''
 import time
 from primality import primality as prim
 #prim.isprime(number) or number%2!=0 or number%3!=0 or number%4!=0 or number%5!=0 or number%6!=0 or number%7!=0:
 
-def findDivisors(number):
-    result = 0
+def isCandidate(number,min_n):
+    result = False
     n = 0
     k = 0
     n_list = []
@@ -37,28 +37,38 @@ def findDivisors(number):
         if number%prim.nthprime(n) == 0:
             k = 0
             number /= prim.nthprime(n)
-            result += 1
             n_list.append(prim.nthprime(n))
         else:
             n += 1
             k += 1
-    print(n_list)
+    if len(n_list)>=min_n:
+        result = True
     return result
 
 def triangNumber(n):
     return round((n**2+n)/2)
 
-def solution(target):
+def findDivisors(number):
+    d_size = 2
+#    d_list = [1,number]
+    for k in range(2,number):
+        if number%k==0:
+#            d_list.append(k)
+            d_size += 1
+    return d_size
+
+def solution(min_divisors):
     result = 0
     divisors = 0
     n = 1
-    while divisors<target or n<12300:
+    while divisors<min_divisors:
         n += 1
         result = triangNumber(n)
-        divisors = findDivisors(result)
+        if isCandidate(result,11):
+            divisors = findDivisors(result)
         print(n,result,divisors)
     return result
 
 timer=time.time()
-print(solution(10))
+print(solution(500))
 print(f'It took {round(time.time()-timer,4)} secs')

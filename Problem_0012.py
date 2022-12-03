@@ -30,16 +30,19 @@ def findDivisors(number):
     result = 0
     n = 0
     k = 0
+    n_list = []
     while number > 2:
-        if k==0 and (prim.isprime(round(number)) or number%2!=0 or number%3!=0 or number%5!=0 or number%7!=0):
+        if k>1:
             break
-        elif k < 1:
-            k += 1
         if number%prim.nthprime(n) == 0:
+            k = 0
             number /= prim.nthprime(n)
             result += 1
+            n_list.append(prim.nthprime(n))
         else:
             n += 1
+            k += 1
+    print(n_list)
     return result
 
 def triangNumber(n):
@@ -49,7 +52,7 @@ def solution(target):
     result = 0
     divisors = 0
     n = 1
-    while divisors<target or n<12350:
+    while divisors<target or n<12300:
         n += 1
         result = triangNumber(n)
         divisors = findDivisors(result)

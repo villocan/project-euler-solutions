@@ -23,14 +23,24 @@ Problem Solution:
 
 '''
 import time
+from primality import primality as prim
+#prim.isprime(number) or number%2!=0 or number%3!=0 or number%4!=0 or number%5!=0 or number%6!=0 or number%7!=0:
 
 def findDivisors(number):
-    factors = [1]
-    for factor in range(2,number):
-        if number%factor==0:
-            factors.append(factor)
-    factors.append(number)
-    return factors
+    result = 0
+    n = 0
+    k = 0
+    while number > 2:
+        if k==0 and (prim.isprime(round(number)) or number%2!=0 or number%3!=0 or number%5!=0 or number%7!=0):
+            break
+        elif k < 1:
+            k += 1
+        if number%prim.nthprime(n) == 0:
+            number /= prim.nthprime(n)
+            result += 1
+        else:
+            n += 1
+    return result
 
 def triangNumber(n):
     return round((n**2+n)/2)
@@ -38,15 +48,14 @@ def triangNumber(n):
 def solution(target):
     result = 0
     divisors = 0
-    n = 12374
-    while divisors<target:
+    n = 1
+    while divisors<target or n<12350:
         n += 1
         result = triangNumber(n)
-        divisors_list = findDivisors(result)
-        divisors = len(divisors_list)
+        divisors = findDivisors(result)
         print(n,result,divisors)
     return result
 
 timer=time.time()
-print(solution(500))
+print(solution(10))
 print(f'It took {round(time.time()-timer,4)} secs')

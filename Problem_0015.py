@@ -14,10 +14,12 @@ Problem Solution:
 '''
 import time
 
-def solution():
+def solution(n):
     result = 0
+    P=[1,1]
+    S=2*n
     return result
 
 timer=time.time()
-print(solution())
+print(solution(2))
 print(f'It took {round(time.time()-timer,4)} secs')

@@ -12,14 +12,36 @@ What is the largest prime factor of the number 600851475143 ?
 Problem Solution:
 6857
 '''
+import random
 
-def isPrime(N):
-    multiples=0
-    for n in range(1,N):
-        if N%(N-n)==0:
-            multiples+=1
-        if multiples>1:
+def isPrime(n, k=5):
+    # Si n es 2 o 3, entonces es primo
+    if n == 2 or n == 3:
+        return True
+    # Si n es par, entonces no es primo
+    if n % 2 == 0:
+        return False
+    
+    # Encontrar d y r tal que n-1 = 2^r * d, donde d es impar
+    r, d = 0, n-1
+    while d % 2 == 0:
+        r += 1
+        d //= 2
+    
+    # Realizar el test de Miller-Rabin k veces
+    for _ in range(k):
+        a = random.randint(2, n-2)
+        x = pow(a, d, n)
+        if x == 1 or x == n-1:
+            continue
+        for _ in range(r-1):
+            x = pow(x, 2, n)
+            if x == n-1:
+                break
+        else:
             return False
+    
+    # Si pasa todas las iteraciones, es probable que sea primo
     return True
 
 def solution(N):

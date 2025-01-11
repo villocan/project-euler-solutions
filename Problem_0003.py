@@ -12,6 +12,7 @@ What is the largest prime factor of the number 600851475143 ?
 Problem Solution:
 6857
 '''
+
 def isPrime(n):
     for k in range(2,n):
         if n%k == 0:
@@ -30,4 +31,5 @@ def solution(n):
             result = result/factor
     return last
 
+print(solution(13195))
 print(solution(600851475143))

@@ -15,7 +15,6 @@ Problem Solution:
 756872327473
 '''
 import time
-from primality import primality as prim
 
 def solution(min_discs,target_prob):
     blue_discs = round(0.5+(0.25+target_prob*min_discs*(min_discs-1))**0.5)
